@@ -9,8 +9,8 @@ FONT_NAME = "NanumGothic"
 FONT_TTF = 'NanumGothic.ttf'
 
 
-def koreanize():
-    font_dir_path = get_font_path()
+def koreanize(fonts_dir=FONTS_DIR, font_name=FONT_NAME):
+    font_dir_path = get_font_path(fonts_dir)
     font_dirs = [font_dir_path]
     font_files = font_manager.findSystemFonts(fontpaths=font_dirs)
     is_support_createFontList = LooseVersion(matplotlib.__version__) < '3.2'
@@ -20,16 +20,16 @@ def koreanize():
     else:
         for fpath in font_files:
             font_manager.fontManager.addfont(fpath)
-    matplotlib.rc('font', family=FONT_NAME)
+    matplotlib.rc('font', family=font_name)
     matplotlib.rcParams['axes.unicode_minus'] = False
 
 
-def get_font_ttf_path():
-    return os.path.join(get_font_path(), FONT_TTF)
+def get_font_ttf_path(font_ttf=FONT_TTF):
+    return os.path.join(get_font_path(), font_ttf)
 
 
-def get_font_path():
-    return os.path.abspath(os.path.join(os.path.dirname(__file__), FONTS_DIR))
+def get_font_path(fonts_dir=FONTS_DIR):
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), fonts_dir))
 
 
-koreanize()
+#koreanize()
